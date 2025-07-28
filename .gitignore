@@ -1,4 +1,7 @@
 # Logs
+
+# Ignore environment variables file
+.env
 logs
 *.log
 npm-debug.log*

@@ -1,21 +1,41 @@
-import React from 'react';
-import movieListData from '../movieListData.json';
-import MovieSlider from '../components/MovieSlider'; 
+import React, { useState, useEffect } from 'react';
+import MovieSlider from '../components/MovieSlider';
+import instance from '../api/axios';
 
-/**
- * 영화 목록을 보여주는 메인 페이지 컴포넌트
- */
 function MainPage() {
-  // 영화 목록을 평점(vote_average) 기준으로 내림차순 정렬합니다.
-  const sortedMovies = movieListData.results.slice().sort((a, b) => b.vote_average - a.vote_average);
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPopularMovies = async () => {
+      try {
+        // 'popular' 영화 목록 API 호출
+        const response = await instance.get('/movie/popular');
+        
+        // adult: false 인 영화만 필터링
+        const nonAdultMovies = response.data.results.filter(movie => !movie.adult);
+        
+        setMovies(nonAdultMovies);
+      } catch (error) {
+        console.error('Error fetching popular movies:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPopularMovies();
+  }, []); // 컴포넌트가 마운트될 때 한 번만 실행
 
   return (
     <div>
       <header className="main-page-header">
         <h2>인기순</h2>
       </header>
-      {/* MovieSlider 컴포넌트에 정렬된 영화 목록을 전달합니다. */}
-      <MovieSlider movies={sortedMovies} />
+      {loading ? (
+        <div>loading...</div>
+      ) : (
+        movies.length > 0 && <MovieSlider movies={movies} />
+      )}
     </div>
   );
 }

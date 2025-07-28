@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout'; // Layout 컴포넌트 import
 import MainPage from './pages/MainPage';
 import DetailPage from './pages/DetailPage';
+import SearchPage from './pages/SearchPage';
 
 /**
  * 앱의 메인 라우팅을 설정하는 컴포넌트
@@ -16,6 +17,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<MainPage />} />
         <Route path="/movie/:movieId" element={<DetailPage />} />
+        <Route path="/search" element={<SearchPage />} />
       </Route>
     </Routes>
   );

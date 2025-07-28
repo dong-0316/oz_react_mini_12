@@ -1,0 +1,33 @@
+.search-page-container {
+  padding: 20px;
+}
+
+.search-term-title {
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.search-result-item {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.search-result-item:hover {
+  transform: scale(1.05);
+}
+
+.search-result-poster {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.no-results-message {
+  color: #888;
+  font-size: 1.2rem;
+}
