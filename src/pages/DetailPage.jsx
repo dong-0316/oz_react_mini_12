@@ -36,15 +36,14 @@ function DetailPage() {
     return <div>영화 정보를 찾을 수 없습니다.</div>;
   }
 
+    const detailContainerStyle = movie.backdrop_path 
+    ? { backgroundImage: `url(${BACKDROP_BASE_URL}${movie.backdrop_path})` }
+    : {};
+
   return (
-    <div className="movie-detail-container">
-      {movie.backdrop_path && (
-        <img 
-          className="backdrop-image"
-          src={`${BACKDROP_BASE_URL}${movie.backdrop_path}`} 
-          alt={`${movie.title} 배경`} 
-        />
-      )}
+    <div className="movie-detail-container" style={detailContainerStyle}>
+      {/* 배경 이미지 위에 어두운 오버레이를 추가하여 텍스트 가독성을 높입니다. */}
+      <div className="backdrop-overlay"></div>
       <div className="movie-detail-content">
         <img 
           className="detail-poster"
@@ -57,9 +56,11 @@ function DetailPage() {
             <span>평점: {movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</span>
             <span>개봉일: {movie.release_date || '정보 없음'}</span>
           </div>
-          <h3 className="overview-title">줄거리</h3>
-          <p className="detail-overview">{movie.overview || '줄거리 정보가 없습니다.'}</p>
-          {movie.tagline && <p className="detail-tagline">"{movie.tagline}"</p>}
+          <div className="overview-box">
+            <h3 className="overview-title">줄거리</h3>
+            <p className="detail-overview">{movie.overview || '줄거리 정보가 없습니다.'}</p>
+            {movie.tagline && <p className="detail-tagline">"{movie.tagline}"</p>}
+          </div>
         </div>
       </div>
     </div>
