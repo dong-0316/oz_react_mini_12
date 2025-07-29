@@ -6,8 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #141414; /* 전체 배경색을 어둡게 설정 */
-  color: white; /* 기본 텍스트 색상을 흰색으로 설정 */
+  /* [제거] 테마 시스템이 적용되도록 하드코딩된 배경색과 글자색을 제거합니다. */
 }
 
 .layout-container {
@@ -19,7 +18,13 @@ body {
 /* 모든 페이지 콘텐츠를 감싸고 중앙 정렬하는 컨테이너 */
 .main-content-container {
   max-width: 1280px; /* 콘텐츠의 최대 너비 설정 */
-  margin: 0 auto; /* 좌우 마진을 auto로 주어 중앙 정렬 */
+  margin: 20px auto 0; /* 위쪽 여백 추가 및 중앙 정렬 */
+  /* [추가] 본문을 카드 형태로 만들기 위한 스타일 */
+  background-color: var(--movie-card-bg-color);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
 }
 
 .App {

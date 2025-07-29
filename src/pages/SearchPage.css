@@ -1,5 +1,6 @@
 .search-page-container {
   padding: 20px;
+  color: var(--text-color);
 }
 
 .search-term-title {
@@ -9,17 +10,33 @@
 
 .search-results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* 기본적으로 1개의 컬럼으로 시작 */
+  grid-template-columns: repeat(1, 1fr);
   gap: 20px;
+  padding: 20px;
+}
+
+/* 화면 너비가 600px 이상일 때 (태블릿) */
+@media (min-width: 600px) {
+  .search-results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+/* 화면 너비가 992px 이상일 때 (데스크탑) */
+@media (min-width: 992px) {
+  .search-results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
 }
 
 .search-result-item {
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-}
-
-.search-result-item:hover {
-  transform: scale(1.05);
+  transition: transform 0.2s;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--movie-card-bg-color);
 }
 
 .search-result-poster {
@@ -28,6 +45,8 @@
 }
 
 .no-results-message {
-  color: #888;
   font-size: 1.2rem;
+  text-align: center;
+  grid-column: 1 / -1; /* 전체 그리드 너비 차지 */
+  color: var(--text-color);
 }

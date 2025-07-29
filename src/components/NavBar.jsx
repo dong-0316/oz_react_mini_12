@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { BsSunFill, BsMoonFill } from 'react-icons/bs'; // [추가] 해/달 아이콘 import
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './NavBar.css';
+import { useDebounce } from '../hooks/useDebounce';
 
-function NavBar() {
-  const [searchTerm, setSearchTerm] = useState('');
+function NavBar({ isDarkMode, toggleTheme }) {
+    const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms 지연
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    // 디바운싱(Debouncing) 처리
-    // 사용자가 입력을 멈춘 후 500ms가 지나면 검색 페이지로 이동
-    const debounce = setTimeout(() => {
-      if (searchTerm) {
-        navigate(`/search?q=${searchTerm}`);
-      } else {
-        // 검색어가 없고, 현재 위치가 검색 페이지일 때만 메인으로 이동
-        if (location.pathname === '/search') {
-          navigate('/');
-        }
+    if (debouncedSearchTerm) {
+      // 디바운스된 검색어가 있으면 검색 페이지로 이동
+      navigate(`/search?q=${debouncedSearchTerm}`);
+    } else {
+      // 검색어가 없고, 현재 위치가 검색 페이지일 때만 메인으로 이동
+      if (location.pathname === '/search') {
+        navigate('/');
       }
-    }, 500);
-
-    // 컴포넌트가 언마운트되거나 searchTerm이 변경될 때 타이머를 클리어
-    return () => {
-      clearTimeout(debounce);
-    };
-  }, [searchTerm, navigate, location.pathname]);
+    }
+  }, [debouncedSearchTerm, navigate, location.pathname]);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -51,7 +46,11 @@ function NavBar() {
       </div>
       <div className="navbar-right">
         <button className="auth-button login">로그인</button>
-        <button className="auth-button signup">회원가입</button>
+                <button className="auth-button signup">회원가입</button>
+        {/* [수정] 테마 토글 아이콘 버튼 */}
+        <button className="theme-toggle-btn" onClick={toggleTheme}>
+          {isDarkMode ? <BsSunFill /> : <BsMoonFill />}
+        </button>
       </div>
     </nav>
   );

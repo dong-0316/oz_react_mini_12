@@ -1,11 +1,14 @@
 /* 영화 카드 전체를 감싸는 링크 */
 .movie-card {
-  background-color: #222;
-  border-radius: 8px;
+  position: relative;
   overflow: hidden;
-  text-decoration: none; /* 링크의 밑줄 제거 */
-  color: white; /* 기본 텍스트 색상 */
-  transition: transform 0.2s ease-in-out;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* [수정] 카드 전체 배경색은 제거하고, 하단 정보 영역에서만 설정합니다. */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  /* [추가] 카드 전체에 테마 배경색을 적용합니다. */
+  background-color: var(--movie-card-bg-color);
   display: block; /* 링크가 div처럼 영역을 차지하도록 */
   width: 100%;
 }
@@ -25,6 +28,10 @@
 /* 영화 정보 (제목, 평점) */
 .movie-info {
   padding: 15px;
+  /* [추가] 테마 변수를 사용하여 배경색과 텍스트 색상 설정 */
+  background-color: var(--movie-card-bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* 영화 제목 */
