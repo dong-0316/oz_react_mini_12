@@ -120,3 +120,73 @@
 .overview-title {
   margin-top: 0;
 }
+
+/* --- 모바일 전용 상세 페이지 스타일 --- */
+
+.movie-detail-container-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  /* 테마에 맞는 기본 배경/텍스트 색상 적용 */
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+}
+
+.detail-poster-mobile {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.detail-info-mobile {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.detail-title-mobile {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.detail-meta-mobile {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+}
+
+.overview-box-mobile {
+  width: 100%;
+  padding: 20px;
+  margin-top: 10px;
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  text-align: left;
+}
+
+.overview-title-mobile {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.detail-overview-mobile {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.detail-tagline-mobile {
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}

@@ -11,7 +11,8 @@ body {
 
 .layout-container {
   width: 100%;
-  padding: 0 50px; /* 좌우에 여백을 주어 화면 가장자리에 붙지 않도록 함 */
+  /* [수정] 고정된 네비게이션 바를 위한 상단 여백(80px) 추가 */
+  padding: 80px 50px 0;
   box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
 }
 
@@ -25,6 +26,13 @@ body {
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+}
+
+/* [추가] 넷플릭스 스타일: 메인 페이지에서 박스 형태를 제거하기 위한 오버라이드 스타일 */
+.main-content-container.netflix-style {
+  background-color: transparent;
+  padding: 0;
+  box-shadow: none;
 }
 
 .App {

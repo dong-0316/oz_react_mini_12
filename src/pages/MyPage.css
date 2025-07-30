@@ -1,0 +1,39 @@
+.mypage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  min-height: calc(100vh - var(--navbar-height));
+  box-sizing: border-box;
+}
+
+.mypage-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+.user-info-box {
+  background-color: var(--navbar-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-info-label {
+  font-size: 0.9rem;
+  color: var(--text-color-light);
+  margin-bottom: 0.5rem;
+}
+
+.user-info-content {
+  font-size: 1.1rem;
+  font-weight: 500;
+  word-break: break-all; /* 이메일 주소가 길 경우 줄바꿈 */
+}

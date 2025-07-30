@@ -1,48 +1,52 @@
-/* 슬라이더 컨테이너 전체에 대한 스타일 */
-
-.card-info {
-  background-color: var(--movie-card-bg-color);
-  color: var(--text-color);
-  padding: 15px;
-  text-align: left;
-}
-
-.card-info h4 {
-  margin: 0 0 5px 0;
-  font-size: 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.card-info p {
-  margin: 0;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.star-icon {
-  color: #f5c518; /* 별점 아이콘은 노란색으로 고정 */
-}
+/* --- 데스크탑 슬라이더 기본 스타일 --- */
 .movie-slider-container {
-  padding: 20px 0; /* 위아래 여백 */
+  /* PC에서는 좌우 여백을 충분히 줍니다. */
+  padding: 20px 0; /* [수정] 좌우 패딩을 제거하여 부모의 정렬을 따름 */
 }
 
-/* Swiper 슬라이드 자체에 대한 스타일 조정 */
-.swiper-slide {
+.slider-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.movie-swiper {
+  /* [수정] Swiper 컨테이너의 기본 overflow 속성을 변경하여 그림자가 잘리지 않도록 합니다. */
+  overflow: visible !important;
+  /* [수정] 페이지네이션과 카드 하단 그림자를 위한 공간을 확보합니다. */
+  padding-bottom: 40px;
+  /* [추가] 슬라이더를 좌우로 넘길 때, 페이지 전체가 스크롤되는 현상을 방지합니다. */
+  overscroll-behavior-y: contain !important;
+}
+
+.movie-slide {
+  cursor: pointer;
+}
+
+/* Swiper 네비게이션/페이지네이션 스타일 */
+.movie-swiper .swiper-button-next::after,
+.movie-swiper .swiper-button-prev::after {
+  font-size: 24px !important;
+  color: var(--text-color);
+}
+
+.movie-swiper .swiper-pagination-bullet-active {
+  background-color: #e50914 !important;
+}
+
+
+/* --- 모바일 전용 세로 리스트 스타일 --- */
+.movie-list-container-mobile {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center; /* 카드를 가운데 정렬 */
+  gap: 20px; /* 카드 사이의 간격 */
+  padding: 20px; /* 모바일에서는 좌우 여백을 줄임 */
 }
 
-/* 네비게이션 버튼(이전/다음 화살표) 색상 변경 */
-.swiper-button-prev,
-.swiper-button-next {
-  color: #8b5cf6; /* 보라색 */
-}
-
-/* 페이지네이션(점) 활성 상태 색상 변경 */
-.swiper-pagination-bullet-active {
-  background: #8b5cf6; /* 보라색 */
+.movie-card-mobile {
+  width: 90%; /* 화면 너비의 90%를 차지 */
+  max-width: 400px; /* 너무 커지지 않도록 최대 너비 설정 */
+  cursor: pointer;
 }

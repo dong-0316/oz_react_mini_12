@@ -1,22 +1,33 @@
+/* [수정] 네비게이션 바 기본 스타일: 전체 너비, 투명 배경 */
 .navbar {
-  background-color: var(--navbar-bg-color); /* 전역 변수 사용 */
-  /* [수정] 좌우 패딩을 제거하고, 중앙 정렬을 위해 margin: auto를 사용합니다. */
-  padding: 15px 20px;
+  position: fixed; /* [수정] 항상 상단에 고정되도록 변경 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* 다른 요소들 위에 오도록 z-index 설정 */
+  background-color: transparent; /* 초기 배경 투명 */
+  padding: 15px 0; /* 내부 콘텐츠에서 좌우 패딩을 관리하므로 여기선 제거 */
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 자식 요소들을 양쪽 끝과 중앙에 배치 */
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  /* [추가] 네비게이션 바 모서리를 둥글게 처리 */
-  border-radius: 12px;
-  /* [추가] 입체감을 위한 그림자 효과 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* [추가] 부드러운 전환 효과 */
+  justify-content: center; /* 내부 콘텐츠를 중앙 정렬 */
   transition: background-color 0.3s, box-shadow 0.3s;
-  /* [수정] 잘못 중첩된 스타일을 제거했습니다. */
-  max-width: 1280px;
-  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* [추가] 스크롤 시 네비게이션 바 스타일 */
+.navbar.scrolled {
+  background-color: var(--navbar-bg-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* [추가] 네비게이션 바 내부 콘텐츠를 감싸고 정렬하는 컨테이너 */
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1280px; /* 최대 너비 설정 */
+  padding: 0 20px; /* 좌우 여백 */
   box-sizing: border-box;
 }
 
@@ -28,7 +39,7 @@
 }
 
 .navbar-center {
-  flex-grow: 1; /* 중앙 영역이 남는 공간을 모두 차지하도록 설정 */
+  flex-grow: 1;
   justify-content: center;
   padding: 0 20px;
 }
@@ -36,8 +47,8 @@
 .navbar-logo {
   color: var(--text-color);
   text-decoration: none;
-  font-size: 2rem; /* 로고 폰트 크기 키움 */
-  font-weight: 900; /* 매우 굵게 */
+  font-size: 2rem;
+  font-weight: 900;
   display: flex;
   align-items: center;
 }
@@ -48,8 +59,8 @@
 
 .logo-dot {
   color: var(--auth-button-color);
-  font-size: 3rem; /* 점 크기 키움 */
-  line-height: 1; /* 줄 높이 조절 */
+  font-size: 3rem;
+  line-height: 1;
 }
 
 .search-bar {
@@ -61,11 +72,9 @@
   background-color: var(--search-bar-bg-color);
   color: var(--text-color);
   font-size: 1rem;
-  /* [추가] 부드러운 전환 효과 */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* [추가] 검색창 포커스 시 스타일 */
 .search-bar:focus {
   outline: none;
   border-color: var(--point-color-1);
@@ -80,22 +89,165 @@
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 10px; /* 버튼 사이 간격 */
+  gap: 1rem;
 }
 
-/* [수정] 불필요한 스위치 스타일을 삭제하고 아이콘 버튼 스타일로 대체합니다. */
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .theme-toggle-btn {
   background: none;
   border: none;
   cursor: pointer;
   color: var(--text-color);
-  font-size: 1.5rem; /* 아이콘 크기 조절 */
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 5px;
   margin-left: 10px;
   transition: transform 0.2s ease-in-out, color 0.3s ease;
+}
+
+
+/* --- Mobile Navigation (Hamburger Menu) Styles --- */
+
+.navbar-mobile {
+  flex-direction: column;
+  align-items: stretch; /* 자식 요소들이 전체 너비를 차지하도록 설정 */
+  gap: 10px; /* 상단과 하단 영역 사이의 간격 */
+  padding: 10px 15px;
+}
+
+.navbar-mobile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-mobile-bottom {
+  width: 100%;
+}
+
+/* 모바일 검색창은 최대 너비 제한 없이 꽉 차게 설정 */
+.navbar-mobile-bottom .search-bar {
+  max-width: none;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 1.8rem; /* 아이콘 크기 살짝 조정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* 조금 더 어둡게 */
+  z-index: 1000;
+  animation: fadeIn 0.3s forwards;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%; /* 너비 살짝 넓힘 */
+  max-width: 320px;
+  height: 100%;
+  background-color: var(--navbar-bg-color);
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  animation: slideIn 0.3s forwards;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 2.2rem;
+}
+
+.mobile-menu-content {
+  padding: 70px 25px 25px; /* 닫기 버튼 피해서 패딩 조정 */
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* 섹션간 간격 */
+  height: 100%;
+}
+
+/* 햄버거 메뉴에서 검색창이 제거되었으므로 관련 스타일 불필요 */
+
+.mobile-auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  padding-top: 30px;
+  align-items: center; /* [추가] 버튼들을 중앙으로 정렬 */
+}
+
+.mobile-auth-buttons .auth-button {
+  width: 90%; /* [수정] 너비를 90%로 줄여 여백 생성 */
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+}
+
+.mobile-theme-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  margin-top: auto; /* 항상 하단에 위치하도록 */
+  color: var(--text-color);
+}
+
+.mobile-theme-toggle span {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* --- Animations --- */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .theme-toggle-btn:hover {
@@ -111,41 +263,85 @@
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-/* [수정] 로그인 버튼 - 고스트 버튼 스타일 */
+/* 로그인 버튼: 테두리 스타일 (고스트 버튼) */
 .auth-button.login {
   background-color: transparent;
-  border-color: var(--auth-button-color); /* [수정] 올바른 변수 사용 */
-  color: var(--auth-button-color); /* [수정] 올바른 변수 사용 */
+  border-color: var(--auth-button-color);
+  color: var(--auth-button-color);
 }
 
 .auth-button.login:hover {
-  background-color: var(--auth-button-color); /* [수정] 올바른 변수 사용 */
-  color: var(--primary-button-text-color); /* [수정] 올바른 변수 사용 */
+  background-color: var(--auth-button-color);
+  color: var(--primary-button-text-color);
 }
 
-/* [수정] 회원가입 버튼 - 솔리드 버튼 스타일 */
+/* 회원가입 버튼: 채우기 스타일 (솔리드 버튼) */
 .auth-button.signup {
-  background-color: var(--auth-button-color); /* [수정] 올바른 변수 사용 */
-  border-color: var(--auth-button-color); /* [수정] 올바른 변수 사용 */
-  color: var(--primary-button-text-color); /* [수정] 올바른 변수 사용 */
+  background-color: var(--auth-button-color);
+  border-color: var(--auth-button-color);
+  color: var(--primary-button-text-color);
 }
 
 .auth-button.signup:hover {
-  /* [수정] 호버 시 밝기를 살짝 어둡게 조절하여 피드백 제공 */
   filter: brightness(0.9);
 }
 
-.login {
+/* 로그아웃 버튼: 로그인 버튼과 동일한 고스트 버튼 스타일 적용 */
+.auth-button.logout {
   background-color: transparent;
-  border: 1px solid var(--auth-button-color);
+  border-color: var(--auth-button-color);
+  color: var(--auth-button-color);
 }
 
-.signup {
-  background-color: var(--auth-button-color); /* 보라색 배경 */
+.auth-button.logout:hover {
+  background-color: var(--auth-button-color);
+  color: var(--primary-button-text-color);
 }
 
-.auth-button:hover {
-  opacity: 0.8;
+/* --- Profile Dropdown Styles --- */
+
+.profile-container {
+  position: relative; /* 드롭다운의 기준점 */
+  display: flex;
+  align-items: center;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 55px; /* 프로필 이미지 아래에 위치 */
+  right: 0;
+  background-color: var(--navbar-bg-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.75rem;
+  z-index: 1010; /* 다른 요소들 위에 오도록 */
+  border: 1px solid var(--border-color);
+  width: max-content; /* 내용에 맞게 너비 조절 */
+}
+
+/* 드롭다운 메뉴 아이템 공통 스타일 */
+/* [수정] 드롭다운 메뉴 아이템 스타일 통합 및 레이아웃 틀어짐 방지 */
+.profile-dropdown .dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 10px 16px; /* 패딩 값 통일 */
+  background: none;
+  border: none; /* border 제거 */
+  border-radius: 8px;
+  color: var(--text-color);
+  font-weight: normal;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: left !important;
+  box-sizing: border-box; /* 레이아웃 계산 기준 통일 */
+  line-height: 1.5; /* 줄 높이 추가하여 안정성 확보 */
+}
+
+/* [수정] 드롭다운 아이템 호버 효과 통합 */
+.profile-dropdown .dropdown-item:hover {
+  background-color: var(--search-bar-bg-color);
+  color: var(--text-color);
 }
 
 /* --- 반응형 디자인을 위한 미디어 쿼리 --- */

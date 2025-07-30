@@ -1,0 +1,23 @@
+.protected-route-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  min-height: calc(100vh - var(--navbar-height));
+  text-align: center;
+}
+
+.unauthorized-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--danger-color, #e53e3e); /* 위험/경고를 나타내는 색상 */
+  margin-bottom: 1rem;
+}
+
+.unauthorized-message {
+  font-size: 1.2rem;
+  color: var(--text-color-light);
+}

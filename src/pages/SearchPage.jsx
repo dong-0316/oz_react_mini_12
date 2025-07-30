@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import instance from '../api/axios';
+import MovieCard from '../components/MovieCard';
 import './SearchPage.css';
 
 const POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500";
@@ -32,9 +33,7 @@ function SearchPage() {
     fetchSearchResults();
   }, [query]); // query가 바뀔 때마다 검색을 다시 실행합니다.
 
-  const handleMovieClick = (movieId) => {
-    navigate(`/movie/${movieId}`);
-  };
+
 
   return (
     <div className="search-page-container">
@@ -43,13 +42,7 @@ function SearchPage() {
         {searchResults.length > 0 ? (
           searchResults.map((movie) => (
             movie.poster_path && (
-              <div key={movie.id} className="search-result-item" onClick={() => handleMovieClick(movie.id)}>
-                <img
-                  src={`${POSTER_BASE_URL}${movie.poster_path}`}
-                  alt={movie.title}
-                  className="search-result-poster"
-                />
-              </div>
+              <MovieCard key={movie.id} movie={movie} onClick={() => navigate(`/movie/${movie.id}`)} />
             )
           ))
         ) : (

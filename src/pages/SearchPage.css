@@ -1,4 +1,6 @@
 .search-page-container {
+  position: relative; /* z-index를 적용하기 위해 position 속성 추가 */
+  z-index: 0; /* 다른 sticky/fixed 요소와의 z-index 충돌 방지 */
   padding: 20px;
   color: var(--text-color);
 }
